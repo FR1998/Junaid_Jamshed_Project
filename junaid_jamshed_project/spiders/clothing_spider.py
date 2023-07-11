@@ -21,26 +21,32 @@ class Clothing_Spider(CrawlSpider):
     
     def start_requests(self):
         for url in self.start_urls:
+            
             yield Request(url, cookies={"country_code":self.country_code})
 
     
     def extract_name(self, response):
+        
         return response.css(".base::text").get()
     
     
     def extract_price(self, response):
+        
         return response.css(".price::text").get()
     
     
     def extract_images(self, response):
+        
         return response.css(".MagicToolboxSelectorsContainer div img::attr(src)").getall()
     
     
     def extract_additional_info(self, response):
+        
         return response.css("#product-attribute-specs-table .data::text").getall()
     
     
     def extract_code(self, response):
+        
         return response.css(".value::text").get()
 
 
