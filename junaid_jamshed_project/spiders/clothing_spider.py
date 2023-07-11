@@ -19,18 +19,17 @@ class ClothingSpider(CrawlSpider):
                 restrict_css="ul.columns-group li.megamenu.level1 a[href*='/mens']", 
                 attrs="href"
             ), 
-                follow=True
-            ),
+            follow=True
+        ),
         Rule(
             LinkExtractor(
                 restrict_css="a.product.photo.product-item-photo", 
                 attrs="href"
             ), 
-                callback="parse_clothing_product", 
-                follow=True
-            ),
-        Rule(
-            LinkExtractor(restrict_css="a.action.next", attrs="href"), follow=True),
+            callback="parse_clothing_product", 
+            follow=True
+        ),
+        Rule(LinkExtractor(restrict_css="a.action.next", attrs="href"), follow=True),
     ]
     
     def start_requests(self):
@@ -39,23 +38,18 @@ class ClothingSpider(CrawlSpider):
             yield Request(url, cookies={"country_code":self.country_code})
 
     def extract_name(self, response):
-        
         return response.css(".base::text").get()
     
     def extract_price(self, response):
-        
         return response.css(".price::text").get()
     
     def extract_images(self, response):
-        
         return response.css(".MagicToolboxSelectorsContainer div img::attr(src)").getall()
     
     def extract_additional_info(self, response):
-        
         return response.css("#product-attribute-specs-table .data::text").getall()
     
     def extract_code(self, response):
-        
         return response.css(".value::text").get()
 
     def parse_clothing_product(self, response):
