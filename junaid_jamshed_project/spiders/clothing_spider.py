@@ -34,7 +34,6 @@ class ClothingSpider(CrawlSpider):
     
     def start_requests(self):
         for url in self.start_urls:
-            
             yield Request(url, cookies={"country_code":self.country_code})
 
     def extract_name(self, response):
