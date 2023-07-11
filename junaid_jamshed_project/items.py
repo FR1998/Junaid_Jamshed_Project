@@ -1,7 +1,7 @@
 import scrapy
 
 
-class Clothing_Item(scrapy.Item):
+class ClothingItem(scrapy.Item):
     product_name = scrapy.Field()
     product_price = scrapy.Field()
     product_images = scrapy.Field()
